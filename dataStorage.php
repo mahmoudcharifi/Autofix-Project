@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $pass = $_POST["password"];
     $type = $_POST["type"];
 
-    // Vérifier si email existe déjà
     $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
     $check->bind_param("s", $email);
     $check->execute();
@@ -22,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     $password = password_hash($pass, PASSWORD_DEFAULT);
 
-    // Enregistrer user
     $insert = $conn->prepare("INSERT INTO users (fullName, email, password, type) VALUES (?, ?, ?, ?)");
     $insert->bind_param("ssss", $fullName, $email, $password, $type);
 

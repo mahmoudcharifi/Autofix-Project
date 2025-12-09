@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Ouvrir directement l'onglet RDV après création (saveRdv.php ?tab=rdv)
     const params = new URLSearchParams(window.location.search);
     const tab = params.get("tab");
     if (tab) {

@@ -20,10 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($update->execute()) {
 
-        // On supprime la variable temporaire
         unset($_SESSION["pending_garage"]);
 
-        // GARAGISTE PRÊT → REDIRECTION VERS LOGIN
         header("Location: pageLogin.php");
         exit;
 

@@ -37,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $pass = $_POST["password"];
 
-    // 1. Vérifier si l'email existe
     $sql = $conn->prepare("SELECT id, password, type FROM users WHERE email = ?");
     $sql->bind_param("s", $email);
     $sql->execute();
@@ -48,14 +47,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $sql->bind_result($id, $hashedPass, $type);
         $sql->fetch();
 
-        // 2. Vérifier le mot de passe
         if (password_verify($pass, $hashedPass)) {
 
-            // 3. Créer la session
             $_SESSION["user_id"] = $id;
             $_SESSION["user_type"] = $type;
 
-            // 4. Redirection
             if ($type === "Garage") {
                 header("Location: garageDashboard.php");
                 exit;

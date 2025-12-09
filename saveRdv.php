@@ -31,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    // Retour au dashboard, onglet RDV ouvert
     header("Location: clientDashboard.php?tab=rdv");
     exit;
 }

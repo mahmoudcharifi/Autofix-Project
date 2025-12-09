@@ -14,13 +14,13 @@ if ($conn->connect_error) {
     die("Erreur de connexion : " . $conn->connect_error);
 }
 
-/* 1) Récupérer les véhicules du client */
+/*  Récupérer les véhicules du client */
 $vehStmt = $conn->prepare("SELECT id, marque, modele, immatriculation FROM vehicles WHERE user_id = ?");
 $vehStmt->bind_param("i", $clientId);
 $vehStmt->execute();
 $vehiclesResult = $vehStmt->get_result();
 
-/* 2) Récupérer les rendez-vous du client (avec véhicule + garage) */
+/* Récupérer les rendez-vous du client (avec véhicule + garage) */
 $rdvStmt = $conn->prepare("
     SELECT  r.id,
             r.date_rdv,
@@ -48,9 +48,6 @@ $result = $rdvStmt->get_result();
     <script defer src="clientDashboard.js"></script>
     <link rel="stylesheet" href="style/client.css">
     <style>
-        /* ------------------------------- */
-/*      AUTOFiX – Dashboard Client */
-/* ------------------------------- */
 
 * {
     margin: 0;
@@ -64,9 +61,6 @@ body {
     color: #333;
 }
 
-/* ------------------------------- */
-/*             TOP BAR             */
-/* ------------------------------- */
 
 .topbar {
     width: 100%;
@@ -95,9 +89,6 @@ body {
     background: #a30000;
 }
 
-/* ------------------------------- */
-/*           NAV TABS              */
-/* ------------------------------- */
 
 .tabs {
     display: flex;
@@ -125,9 +116,6 @@ body {
     color: #0b5cff;
 }
 
-/* ------------------------------- */
-/*          GLOBAL LAYOUT          */
-/* ------------------------------- */
 
 main {
     width: 100%;
@@ -150,9 +138,6 @@ main {
     margin-bottom: 20px;
 }
 
-/* ------------------------------- */
-/*     SECTION – MES VÉHICULES     */
-/* ------------------------------- */
 
 .sectionHeader {
     display: flex;
@@ -191,10 +176,6 @@ main {
     background: #0849c7;
 }
 
-/* ------------------------------- */
-/*       SECTION – EMPTY BOX       */
-/* ------------------------------- */
-
 .emptyBox {
     background: #fff;
     text-align: center;
@@ -208,9 +189,6 @@ main {
     opacity: 0.7;
 }
 
-/* ------------------------------- */
-/*     NOUVEAU RENDEZ-VOUS FORM    */
-/* ------------------------------- */
 
 .rdvForm {
     background: white;
@@ -233,10 +211,6 @@ main {
     border: 1px solid #ccc;
 }
 
-/* ------------------------------- */
-/*     SECTION – MES RENDEZ-VOUS   */
-/* ------------------------------- */
-
 .rdvList {
     display: grid;
     gap: 20px;
@@ -255,9 +229,6 @@ main {
     margin-bottom: 10px;
 }
 
-/* ------------------------------- */
-/*         STATUS COLORS           */
-/* ------------------------------- */
 
 .status {
     padding: 4px 10px;
@@ -296,7 +267,6 @@ main {
 
 <main>
 
-    <!-- 🟦 Onglet : MES VÉHICULES -->
     <section id="vehicles" class="tabContent">
         <div class="sectionHeader">
             <h2 class="title">Mes véhicules</h2>
@@ -324,7 +294,6 @@ main {
         <?php endif; ?>
     </section>
 
-    <!-- 🟦 Onglet : NOUVEAU RENDEZ-VOUS -->
     <section id="newRdv" class="tabContent hidden">
         <h2 class="title">Nouveau rendez-vous</h2>
 
@@ -372,7 +341,6 @@ main {
         </form>
     </section>
 
-    <!-- 🟦 Onglet : MES RENDEZ-VOUS -->
     <section id="rdv" class="tabContent hidden">
         <h2 class="title">Mes rendez-vous</h2>
 
